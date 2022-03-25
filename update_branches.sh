@@ -15,6 +15,18 @@ confirm() {
 	echo "$returnValue"
 }
 
+push() {
+	isDevelop=$(git branch --show-current)
+	if [ "$isDevelop" == "develop" ]
+	then
+		echo "Can't find this branch"
+		exit
+	else
+		git push
+		echo "Branch merged successfully"
+
+	fi
+}
 
 
 git fetch
@@ -41,7 +53,7 @@ do
 			if [ "$isSolved" == "true" ]
 			then
 				git merge --continue
-				git push
+				push
 				echo "Merged successfully!"
 			else
 				exit
@@ -53,8 +65,7 @@ do
 		fi
 
 	else
-		git push
-   		echo "$branch merged and pushed successfully"
+		push
 
  	fi
 
